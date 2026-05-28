@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Łap Kulturę 2026 – Miastko, 4 lipca</title>
+  <meta name="description" content="Pomorski Festiwal Łap Kulturę – muzyka, kuchnia, warsztaty, rękodzieło. Miastko, 4 lipca 2026. Wstęp bezpłatny!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lapkulture.pl">
+  <meta property="og:title" content="Łap Kulturę 2026 – 4 lipca, Miastko">
+  <meta property="og:description" content="Muzyka, kuchnia, warsztaty i rękodzieło w sercu Pomorza. Wstęp bezpłatny!">
+  <meta property="og:image" content="https://lapkulture.pl/img/logo_festiwal4kultur.png">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink:   #D92B93;
+      --red:    #FF2E63;
+      --orange: #FF8A00;
+      --purple: #7209B7;
+      --grad: linear-gradient(135deg, var(--pink) 0%, var(--red) 40%, var(--orange) 100%);
+      --grad-text: linear-gradient(90deg, var(--pink), var(--orange));
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ─── Utility ──────────────────────────────────────── */
+    .grad-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .grad-bg { background: var(--grad); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:.1s; }
+    .reveal-delay-2 { transition-delay:.2s; }
+    .reveal-delay-3 { transition-delay:.3s; }
+
+    /* ─── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      padding: .8rem 2rem;
+      display: flex; align-items:center; justify-content:space-between;
+      transition: background .3s, backdrop-filter .3s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      text-decoration: none;
+      color: #fff;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .nav-logo-img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
+    }
+    .nav-logo-text { display:flex; flex-direction:column; }
+    .nav-logo span { display:block; font-weight:300; font-size:.75rem; opacity:.7; }
+    .nav-links-wrap { display:flex; align-items:center; gap:2rem; }
+    .nav-links-wrap a {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .5px;
+      transition: color .2s;
+    }
+    .nav-links-wrap a:hover { color:#fff; }
+    .nav-cta {
+      background: var(--grad);
+      color: #fff !important;
+      padding: .42rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      font-size: .72rem !important;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: box-shadow .25s, transform .25s !important;
+      box-shadow: 0 4px 18px rgba(217,43,147,.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-cta::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.12);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { box-shadow:0 6px 24px rgba(217,43,147,.55); transform:translateY(-2px) !important; }
+    .nav-cta:hover::after { opacity:1; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:.4rem; }
+    .hamburger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    @media(max-width:768px){
+      .hamburger { display:flex; }
+      .nav-links-wrap {
+        display: none; position:absolute; top:100%; left:0; right:0;
+        flex-direction:column; gap:0;
+        background: rgba(10,10,10,.97);
+        padding:1rem 2rem 2rem;
+        border-top:1px solid rgba(255,255,255,.08);
+      }
+      .nav-links-wrap.open { display:flex; }
+      .nav-links-wrap a { padding:.75rem 0; font-size:1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+      .nav-cta { margin-top:.5rem; text-align:center; }
+    }
+
+    /* ─── TICKER ───────────────────────────────────────── */
+    .ticker-wrap {
+      background: var(--grad);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: .5rem 0;
+      position: relative; z-index:2;
+    }
+    .ticker {
+      display: inline-block;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker span { margin: 0 2rem; font-size:.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+    .ticker-dot { opacity:.6; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+      padding: 7rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset:0;
+      background-image: url('https://lapkulture.pl/img/music.jpg');
+      background-size: cover; background-position:center;
+      filter: brightness(.25) saturate(1.4);
+      transition: opacity 1.5s ease;
+    }
+    .hero-bg-2 { background-image: url('https://lapkulture.pl/img/music2.jpg'); opacity:0; }
+    .hero-bg-3 { background-image: url('https://lapkulture.pl/img/music1.jpg'); opacity:0; }
+    .hero-bg.active { opacity:1; }
+    .hero-overlay {
+      position: absolute; inset:0;
+      background: radial-gradient(ellipse at center bottom, rgba(217,43,147,.18) 0%, rgba(10,10,10,.7) 70%);
+    }
+    .hero-content { position:relative; z-index:2; max-width:900px; width:100%; padding-bottom:6rem; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items:center; gap:.6rem;
+      font-size:.75rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content:''; flex:1; height:1px; width:40px; background:rgba(255,255,255,.2);
+    }
+
+    .hero-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2.5rem);
+      flex-wrap: nowrap;
+    }
+    .hero-logo {
+      width: clamp(90px, 16vw, 220px);
+      height: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,.5));
+    }
+    .hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      line-height: .9;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      margin-bottom: 1rem;
+    }
+    .hero-title .line-1 { display:block; color:#fff; }
+    .hero-title .line-2 {
+      display:block;
+      background: var(--grad-text);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,.7);
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: inline-flex; gap: clamp(.4rem, 2vw, 1rem);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      padding: clamp(.8rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem);
+      margin-bottom: 2.5rem;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .cd-block { text-align:center; min-width: clamp(44px, 10vw, 60px); }
+    .cd-num {
+      display: block;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(1.6rem, 6vw, 3rem);
+      background: var(--grad-text);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .cd-label {
+      display: block;
+      font-size: clamp(.45rem, 1.5vw, .6rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-top: .3rem;
+    }
+    .cd-sep {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.5rem);
+      color: rgba(255,255,255,.15);
+      align-self: center;
+      margin-top: -.5rem;
+    }
+
+    /* Timer ended */
+    .cd-ended { display:none; text-align:center; padding:1.5rem; }
+    .cd-ended.show { display:block; }
+    .countdown.hide { display:none; }
+
+    .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary {
+      background: var(--grad);
+      color: #fff;
+      text-decoration: none;
+      padding: .9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 30px rgba(217,43,147,.4);
+    }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(217,43,147,.55); }
+    .btn-ghost {
+      color: #fff;
+      text-decoration: none;
+      padding: .9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover { border-color:rgba(255,255,255,.6); background:rgba(255,255,255,.05); }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:.4rem;
+      color:rgba(255,255,255,.35); font-size:.65rem; letter-spacing:2px; text-transform:uppercase;
+      animation: bounce 2s ease-in-out infinite;
+      z-index:3; pointer-events:none;
+    }
+    .scroll-hint::after {
+      content:''; display:block; width:1px; height:40px;
+      background:linear-gradient(to bottom, rgba(255,255,255,.3), transparent);
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* Floating flowers */
+    .floating-flowers { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+    .ff { position:absolute; opacity:0; }
+    .ff-1 { top:15%;left:5%;width:70px;animation:ff1 10s 1s ease-in-out infinite; }
+    .ff-2 { top:25%;right:8%;width:55px;animation:ff2 12s 3s ease-in-out infinite; }
+    .ff-3 { bottom:20%;left:10%;width:60px;animation:ff3 13s 6s ease-in-out infinite; }
+    .ff-4 { bottom:18%;right:12%;width:50px;animation:ff4 11s 8s ease-in-out infinite; }
+    @keyframes ff1 { 0%,100%{opacity:0;transform:translateY(0) rotate(0deg)} 15%,85%{opacity:.8} 50%{opacity:.9;transform:translateY(-15px) rotate(20deg)} }
+    @keyframes ff2 { 0%,100%{opacity:0;transform:translateY(0) rotate(0deg)} 15%,85%{opacity:.7} 50%{opacity:.8;transform:translateY(-12px) rotate(-18deg)} }
+    @keyframes ff3 { 0%,100%{opacity:0;transform:translateY(0) rotate(0deg)} 15%,85%{opacity:.75} 50%{opacity:.85;transform:translateY(-10px) rotate(15deg)} }
+    @keyframes ff4 { 0%,100%{opacity:0;transform:translateY(0) rotate(0deg)} 15%,85%{opacity:.65} 50%{opacity:.75;transform:translateY(-14px) rotate(-12deg)} }
+
+    /* ─── SECTION UTILITY ──────────────────────────────── */
+    section { position:relative; overflow:hidden; }
+    .section-light { background:#fff; color:#0a0a0a; }
+    .section-dark  { background:#0f0f0f; color:#fff; }
+    .section-gray  { background:#f7f7f7; color:#0a0a0a; }
+    .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+    .section-pad { padding:6rem 0; }
+
+    .section-label {
+      display: inline-flex; align-items:center; gap:.6rem;
+      font-size:.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+      margin-bottom:1rem;
+    }
+    .section-label .dot { width:6px;height:6px;border-radius:50%;background:var(--grad); display:inline-block; flex-shrink:0; }
+    .section-label.dark { color:rgba(10,10,10,.5); }
+    .section-label.light { color:rgba(255,255,255,.5); }
+
+    .section-title-lg {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    /* ─── O FESTIWALU ──────────────────────────────────── */
+    .about-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .about-heading-logo {
+      width: clamp(55px, 8vw, 100px);
+      height: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    @media(max-width:640px){ .about-heading-logo { display: none; } }
+    .about-heading-row .section-title-lg { margin-bottom: 0; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      background: rgba(0,0,0,.06);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 4rem;
+    }
+    @media(max-width:640px){ .about-grid { grid-template-columns:1fr; } }
+
+    .about-card {
+      background: #fff;
+      padding: 3rem 2.5rem;
+      transition: background .3s;
+    }
+    .about-card:hover { background: #fafafa; }
+    .about-card:first-child { grid-column:1/-1; background: var(--grad); color:#fff; }
+    @media(max-width:640px){ .about-card:first-child { grid-column:1; } }
+
+    .about-num {
+      font-family:'Anton',sans-serif;
+      font-size:5rem;
+      line-height:1;
+      background:var(--grad-text);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:.5rem;
+    }
+    .about-icon-wrap {
+      width:52px; height:52px; border-radius:14px;
+      background: var(--grad);
+      border: none;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.2rem;
+      color: #fff;
+      font-size:1.4rem;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 16px rgba(217,43,147,.35);
+    }
+    .about-card:hover .about-icon-wrap {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(217,43,147,.5);
+    }
+    .about-icon-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .about-card-title {
+      font-family:'Montserrat',sans-serif;
+      font-weight:800;font-size:1.1rem;
+      margin-bottom:.7rem;
+    }
+    .about-card p { font-size:.9rem; line-height:1.7; color:#555; }
+    .about-card:first-child p { color:rgba(255,255,255,.6); }
+    .about-card:first-child .about-card-title { color:#fff; font-size:1.5rem; }
+    .about-card:first-child .about-num { background:none; -webkit-text-fill-color:rgba(255,255,255,.25); color:rgba(255,255,255,.25); }
+
+    /* Stats row */
+    .quote-band {
+      margin-top: 5rem;
+      border-radius: 20px;
+      background: var(--grad);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+    .quote-text {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: #fff;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+    .quote-meta {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+    }
+
+    /* ─── PROGRAM BANNER ───────────────────────────────── */
+    .program-banner {
+      padding: 5rem 0;
+      background: #fff;
+    }
+    .program-banner-inner {
+      background: var(--grad);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .program-banner-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .program-banner-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 1rem;
+    }
+    .program-banner-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .program-banner-sub {
+      font-size: .95rem;
+      color: rgba(255,255,255,.7);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+    .program-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.35);
+      color: #fff;
+      text-decoration: none;
+      padding: .75rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      transition: background .25s, border-color .25s, transform .25s;
+    }
+    .program-banner-btn:hover {
+      background: rgba(255,255,255,.25);
+      border-color: rgba(255,255,255,.6);
+      transform: translateY(-2px);
+    }
+
+    /* ─── GALERIA 2025 ─────────────────────────────────── */
+    .gallery-header {
+      display: flex; align-items:flex-end; justify-content:space-between;
+      margin-bottom: 2.5rem; flex-wrap:wrap; gap:1rem;
+    }
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      grid-template-rows: repeat(3, 260px);
+      gap: 10px;
+    }
+    @media(max-width:900px) { .bento { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; } }
+    @media(max-width:560px) { .bento { grid-template-columns:1fr; } }
+
+    .bento-item {
+      position:relative; overflow:hidden;
+      border-radius:14px; cursor:zoom-in;
+      background:#1a1a1a;
+    }
+    .bento-item img {
+      width:100%;height:100%;
+      object-fit:cover;
+      transition:transform .5s ease;
+      display:block;
+    }
+    .bento-item:hover img { transform:scale(1.06); }
+    .bento-item::after {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 50%);
+      opacity:0;transition:opacity .3s;
+    }
+    .bento-item:hover::after { opacity:1; }
+    .bento-zoom {
+      position:absolute;bottom:1rem;right:1rem;
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(255,255,255,.9);
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;transform:scale(.7);
+      transition:opacity .3s,transform .3s;
+      z-index:2;color:#0a0a0a;font-size:1rem;
+    }
+    .bento-item:hover .bento-zoom { opacity:1;transform:scale(1); }
+
+    /* Bento layout */
+    .bento-item:nth-child(1) { grid-column:span 2; grid-row:span 1; }
+    .bento-item:nth-child(1) img { object-position: center top; }
+    .bento-item:nth-child(2) { grid-column:span 1; grid-row:span 2; }
+    .bento-item:nth-child(3) { grid-column:span 1; }
+    .bento-item:nth-child(4) { grid-column:span 1; }
+    .bento-item:nth-child(5) { grid-column:span 1; }
+    .bento-item:nth-child(6) { grid-column:span 2; }
+    .bento-item:nth-child(7) { grid-column:span 1; }
+    .bento-item:nth-child(8) { grid-column:span 1; }
+    .bento-item:nth-child(9) { grid-column:span 1; }
+
+    @media(max-width:900px) {
+      .bento-item { grid-column:span 1 !important; grid-row:span 1 !important; min-height:220px; }
+    }
+
+    /* Video embed */
+    .video-wrap {
+      position:relative; border-radius:20px; overflow:hidden;
+      aspect-ratio:16/9; margin-bottom:2rem;
+      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+    }
+    .video-wrap iframe { position:absolute;inset:0;width:100%;height:100%; border:none; }
+
+    /* ─── AKTUALNOŚCI ──────────────────────────────────── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    @media(max-width:640px){ .news-grid { grid-template-columns:1fr; } }
+
+    .news-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .news-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,.12); }
+    .news-card-img {
+      height: 200px; overflow:hidden;
+      position:relative;
+    }
+    .news-card-img img { width:100%;height:100%;object-fit:cover;transition:transform .4s; }
+    .news-card:hover .news-card-img img { transform:scale(1.05); }
+    .news-card-img::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:60px;
+      background:linear-gradient(transparent, rgba(0,0,0,.15));
+    }
+    .news-card-body { padding:1.5rem; }
+    .news-tag {
+      display:inline-block;
+      background:var(--grad);
+      color:#fff;
+      font-size:.65rem;
+      font-weight:700;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      padding:.25rem .7rem;
+      border-radius:50px;
+      margin-bottom:.8rem;
+    }
+    .news-card-title {
+      font-weight:800;
+      font-size:1.05rem;
+      color:#0a0a0a;
+      margin-bottom:.6rem;
+      line-height:1.3;
+    }
+    .news-card-body p { font-size:.875rem; color:#555; line-height:1.65; }
+    .news-card-body a { color:var(--red); font-weight:600; }
+
+    /* Coming soon */
+    .coming-soon {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a0a1a 100%);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      text-align: center;
+      margin-top: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .coming-soon::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at center, rgba(217,43,147,.12) 0%, transparent 70%);
+    }
+    .coming-soon-content { position:relative; z-index:1; }
+    .coming-soon h3 {
+      font-family:'Anton',sans-serif;
+      font-size:clamp(2rem,5vw,3.5rem);
+      text-transform:uppercase;
+      color:#fff;
+      margin-bottom:1rem;
+      line-height:1;
+    }
+    .coming-soon p { color:rgba(255,255,255,.55); font-size:1rem; max-width:520px; margin:0 auto 2rem; }
+    .coming-soon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      white-space: nowrap;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: .85rem 2rem;
+      font-size: .85rem;
+    }
+    @media(max-width:480px){
+      .coming-soon-btn { width: 100%; font-size: .8rem; padding: .8rem 1rem; }
+      .coming-soon { padding: 3rem 1.5rem; }
+    }
+
+    /* ─── LIGHTBOX ─────────────────────────────────────── */
+    #lightbox {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.95); z-index:9999;
+      align-items:center; justify-content:center; padding:1rem;
+    }
+    #lightbox.open { display:flex; }
+    #lightbox img {
+      max-width:90vw; max-height:90vh;
+      object-fit:contain; border-radius:10px;
+      box-shadow:0 20px 80px rgba(0,0,0,.8);
+    }
+    .lb-btn {
+      position:absolute; cursor:pointer;
+      background:rgba(255,255,255,.08); border:none; color:#fff;
+      width:3rem; height:3rem; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; transition:background .2s;
+    }
+    .lb-btn:hover { background:rgba(255,255,255,.2); }
+    #lb-close { top:1rem; right:1rem; font-size:1.4rem; }
+    #lb-prev   { left:1rem; top:50%; transform:translateY(-50%); }
+    #lb-next   { right:1rem; top:50%; transform:translateY(-50%); }
+
+    /* ─── SCROLL TOP ───────────────────────────────────── */
+    #scroll-top {
+      position:fixed; bottom:2rem; right:2rem;
+      width:3rem; height:3rem; border-radius:50%;
+      background:var(--grad); color:#fff; border:none;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; cursor:pointer;
+      box-shadow:0 4px 20px rgba(217,43,147,.4);
+      opacity:0; transform:translateY(20px);
+      transition:opacity .3s, transform .3s;
+      z-index:999;
+    }
+    #scroll-top.visible { opacity:1; transform:translateY(0); }
+    #scroll-top:hover { transform:translateY(-3px) !important; }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: #1c1c2e;
+      border-top: 3px solid transparent;
+      border-image: var(--grad) 1;
+      padding: 4rem 0 2rem;
+      color: #fff;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+      gap: 3rem;
+    }
+    @media(max-width:900px) { .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; } }
+    @media(max-width:560px) { .footer-grid { grid-template-columns:1fr; } }
+
+    .footer-logo {
+      display:flex; align-items:center; gap:.8rem;
+      margin-bottom:1rem;
+    }
+    .footer-logo img { height:48px; width:auto; }
+    .footer-logo-text span { display:block; font-weight:700; font-size:1rem; }
+    .footer-logo-text small { font-size:.75rem; color:rgba(255,255,255,.4); font-weight:300; }
+    footer p { color:rgba(255,255,255,.45); font-size:.875rem; line-height:1.7; }
+    .footer-social { display:flex; gap:.6rem; margin-top:1.2rem; }
+    .footer-social a {
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.1);
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:1rem;text-decoration:none;
+      transition:background .2s, transform .2s;
+    }
+    .footer-social a:hover { background:var(--pink); transform:translateY(-2px); }
+    .footer-social-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-col h5 {
+      font-weight:700; font-size:.8rem; letter-spacing:2px;
+      text-transform:uppercase; color:rgba(255,255,255,.4);
+      margin-bottom:1.2rem;
+    }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:.7rem; }
+    .footer-col ul li a {
+      color:rgba(255,255,255,.6); text-decoration:none;
+      font-size:.9rem; transition:color .2s;
+    }
+    .footer-col ul li a:hover { color:#fff; }
+
+    .footer-contact-item {
+      display:flex; gap:.8rem; margin-bottom:1rem; align-items:flex-start;
+    }
+    .footer-contact-item .ico {
+      width:32px;height:32px;border-radius:8px;
+      background:rgba(255,255,255,.05);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.9rem; flex-shrink:0; margin-top:.1rem;
+    }
+    .footer-contact-item p { font-size:.85rem; color:rgba(255,255,255,.5); }
+    .footer-contact-item a { color:rgba(255,255,255,.5); text-decoration:none; transition:color .2s; }
+    .footer-contact-item a:hover { color:#fff; }
+
+    .footer-bottom {
+      margin-top:3rem; padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex; justify-content:center;
+    }
+    .footer-bottom p { font-size:.8rem; color:rgba(255,255,255,.25); }
+
+    .map-wrap {
+      height:180px; border-radius:12px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.08); margin-top:.5rem;
+    }
+    .map-wrap iframe { width:100%;height:100%;border:none; }
+
+    /* ─── DIVIDER ──────────────────────────────────────── */
+    .divider {
+      height:3px; background:var(--grad);
+      margin:0; border:none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button class="lb-btn" id="lb-close">✕</button>
+    <button class="lb-btn" id="lb-prev">&#8592;</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-btn" id="lb-next">&#8594;</button>
+  </div>
+
+  <!-- Scroll to top -->
+  <button id="scroll-top" aria-label="Wróć na górę">&#8593;</button>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">
+      <img src="logo_festiwal4kultur.png" alt="Logo Łap Kulturę" class="nav-logo-img">
+      <span class="nav-logo-text">Pomorski Festiwal <strong class="grad-text">Łap Kulturę</strong>
+      <span>Miastko · 4 lipca 2026</span></span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links-wrap" id="nav-links">
+      <a href="#about">O festiwalu</a>
+      <a href="#galeria">Galeria 2025</a>
+      <a href="#news">Aktualności</a>
+      <a href="#contact">Kontakt</a>
+      <a href="https://maps.app.goo.gl/wPEpSeRgu4UwQkSy8" target="_blank" class="nav-cta">Wstęp bezpłatny</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg active" id="hbg1"></div>
+    <div class="hero-bg hero-bg-2" id="hbg2"></div>
+    <div class="hero-bg hero-bg-3" id="hbg3"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="floating-flowers">
+      <img src="https://lapkulture.pl/img/kwiat1.png" class="ff ff-1" alt="">
+      <img src="https://lapkulture.pl/img/kwiat2.png" class="ff ff-2" alt="">
+      <img src="https://lapkulture.pl/img/kwiat3.png" class="ff ff-3" alt="">
+      <img src="https://lapkulture.pl/img/kwiat1.png" class="ff ff-4" alt="">
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Pomorski Festiwal</div>
+      <h1 class="hero-title">
+        <span class="line-1">Łap</span>
+        <span class="line-2">Kulturę</span>
+      </h1>
+      <p class="hero-sub">Miastko &nbsp;·&nbsp; 4 Lipca 2026 &nbsp;·&nbsp; Wstęp Bezpłatny</p>
+
+      <div class="countdown" id="countdown-wrap">
+        <div class="cd-block"><span class="cd-num" id="days">00</span><span class="cd-label">Dni</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><span class="cd-num" id="hours">00</span><span class="cd-label">Godzin</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><span class="cd-num" id="minutes">00</span><span class="cd-label">Minut</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><span class="cd-num" id="seconds">00</span><span class="cd-label">Sekund</span></div>
+      </div>
+      <div class="cd-ended" id="cd-ended">
+        <p style="font-size:1.1rem;color:rgba(255,255,255,.8);">🎉 Dziękujemy za wspólną zabawę!<br>Do zobaczenia na edycji 2027.</p>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#galeria" class="btn-primary">Zobacz galerię 2025</a>
+        <a href="https://www.facebook.com/profile.php?id=61575530471137" target="_blank" class="btn-ghost">Śledź na Facebooku</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Przewiń</div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- O FESTIWALU -->
+  <section id="about" class="section-light section-pad">
+    <div class="container">
+      <div class="section-label dark"><span class="dot"></span> O nas</div>
+      <div class="about-heading-row reveal">
+        <img src="logo_festiwal4kultur.png" alt="Logo Łap Kulturę" class="about-heading-logo">
+        <h2 class="section-title-lg">
+          Kultura<br><span class="grad-text">na wyciągnięcie ręki</span>
+        </h2>
+      </div>
+
+      <div class="about-grid reveal">
+        <div class="about-card">
+          <div class="about-num">02</div>
+          <div class="about-card-title">Edycja 2026 – wracamy!</div>
+          <p style="color:rgba(255,255,255,.6);">Po niezapomnianej pierwszej edycji Pomorski Festiwal Łap Kulturę powraca 4 lipca 2026 w Miastku. Nowi artyści, nowe strefy, nowe emocje — i ta sama niepowtarzalna atmosfera, która zgromadziła nas w 2025 roku.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-1">
+          <div class="about-icon-wrap"><img src="music.png" alt="Muzyka" class="about-icon-img"></div>
+          <div class="about-card-title">Muzyka i kultura</div>
+          <p>Folkowe i wielokulturowe brzmienia, koncerty na żywo i warsztaty muzyczne — dla każdego, kto kocha autentyczne dźwięki Pomorza i świata.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-2">
+          <div class="about-icon-wrap"><img src="chef.png" alt="Kuchnia" class="about-icon-img"></div>
+          <div class="about-card-title">Kuchnia regionalna</div>
+          <p>Kaszubskie smaki, ukraińska kuchnia i lokalne wyroby — strefa kulinarna to podróż przez smaki różnych kultur Pomorza.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-3">
+          <div class="about-icon-wrap"><img src="spin.png" alt="Warsztaty" class="about-icon-img"></div>
+          <div class="about-card-title">Warsztaty i rękodzieło</div>
+          <p>Wycinanki, garncarstwo, haft kaszubski — odkryj radość tworzenia i poznaj mistrzów tradycyjnych technik z całego regionu.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-3">
+          <div class="about-icon-wrap"><img src="family-2.png" alt="Strefa dziecięca" class="about-icon-img"></div>
+          <div class="about-card-title">Strefa dziecięca</div>
+          <p>Animacje, zabawy ludowe, malowanie twarzy i warsztaty artystyczne — bezpieczna przestrzeń, gdzie najmłodsi mogą odkrywać tradycje przez zabawę i kreatywność.</p>
+        </div>
+      </div>
+
+      <!-- Hasło -->
+      <div class="quote-band reveal">
+        <span class="quote-text">Łap chwilę. Łap kulturę.</span>
+        <span class="quote-meta">4 lipca 2026 · Miastko · Wstęp bezpłatny</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA 2025 -->
+  <section id="galeria" class="section-dark section-pad">
+    <div class="container">
+      <div class="gallery-header reveal">
+        <div>
+          <div class="section-label light"><span class="dot"></span> Wspomnienia</div>
+          <h2 class="section-title-lg">
+            Tak się bawiliśmy<br><span class="grad-text">w 2025 roku</span>
+          </h2>
+        </div>
+        <p style="max-width:360px;color:rgba(255,255,255,.55);font-size:.9rem;line-height:1.7;">
+          Pierwsza edycja festiwalu na zawsze pozostanie w naszych sercach. Dziękujemy każdemu, kto był z nami! Zobacz materiał zrealizowany przez <span style="color:#fff;font-weight:600;">Yanovi-Films</span>.
+        </p>
+      </div>
+
+      <!-- Film -->
+      <div class="video-wrap reveal">
+        <iframe
+          src="https://www.youtube.com/embed/ZIISDTiP0ZU?start=13&rel=0&modestbranding=1"
+          title="Taka jest nasza kultura – I Pomorski Festiwal Łap Kulturę 2025"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- Bento galeria -->
+      <div class="bento reveal" id="gallery-grid">
+        <div class="bento-item" data-index="0">
+          <img src="galeria2025/556187210_25072341872370428_2314240263506310540_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="1">
+          <img src="galeria2025/556427223_25072300859041196_323991684445559618_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="2">
+          <img src="galeria2025/556843345_25072305742374041_6535930801265135153_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="3">
+          <img src="galeria2025/557265746_25072288495709099_6252853155705310174_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="4">
+          <img src="galeria2025/557571823_25072308495707099_9027601071972531336_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="5">
+          <img src="galeria2025/557703968_25072325895705359_8156713356604737017_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="6">
+          <img src="galeria2025/558109376_25072259789045303_7863617768300171720_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="7">
+          <img src="galeria2025/558226852_25072287275709221_6838247282406033462_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+        <div class="bento-item" data-index="8">
+          <img src="galeria2025/569437529_25316031928001420_1372712433781315398_n.jpg" alt="Festiwal 2025" loading="lazy">
+          <div class="bento-zoom">&#128269;</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- AKTUALNOŚCI -->
+  <section id="news" class="section-gray section-pad">
+    <div class="container">
+      <div class="section-label dark"><span class="dot"></span> Co słychać</div>
+      <h2 class="section-title-lg reveal">Aktualności</h2>
+
+      <div class="news-grid">
+        <div class="news-card reveal reveal-delay-1">
+          <div class="news-card-img">
+            <img src="galeria2025/festiwal2026_ruszamy.jpeg" alt="Festiwal 2026 – ruszamy!" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">9 kwietnia 2026</span>
+            <div class="news-card-title">Festiwal 2026 – ruszamy!</div>
+            <p>Drugi rok z rzędu! Łap Kulturę powraca 4 lipca 2026 w Miastku. Nowi artyści, nowe niespodzianki — szczegóły wkrótce!</p>
+          </div>
+        </div>
+
+        <div class="news-card reveal reveal-delay-2">
+          <div class="news-card-img">
+            <img src="https://lapkulture.pl/img/rekodzielo.jpg" alt="Wystawcy" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">9 kwietnia 2026</span>
+            <div class="news-card-title">Jesteś wystawcą?</div>
+            <p>Tworzysz rękodzieło lub oferujesz regionalne produkty? Dołącz do festiwalu! Napisz: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a></p>
+          </div>
+        </div>
+
+        <div class="news-card reveal reveal-delay-1">
+          <div class="news-card-img">
+            <img src="https://lapkulture.pl/img/wolontariusz.png" alt="Wolontariusze" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">9 kwietnia 2026</span>
+            <div class="news-card-title">Szukamy wolontariuszy!</div>
+            <p>Chcesz być częścią ekipy? Dołącz do wolontariuszy i twórz z nami festiwal od środka. Napisz: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a></p>
+          </div>
+        </div>
+
+        <div class="news-card reveal reveal-delay-2">
+          <div class="news-card-img">
+            <img src="https://lapkulture.pl/img/panel_dyskusyjny.png" alt="Partnerzy" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">9 kwietnia 2026</span>
+            <div class="news-card-title">Zostań partnerem 2026</div>
+            <p>Budujemy nową edycję. Zapraszamy do współpracy: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a> lub <a href="tel:+48698679558">+48 698 679 558</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coming soon -->
+      <div class="coming-soon reveal">
+        <div class="coming-soon-content">
+          <h3>Program &amp; artyści<br><span class="grad-text">– wkrótce!</span></h3>
+          <p>Szczegółowy program, lista artystów, strefy tematyczne i partnerzy zostaną ogłoszone niebawem. Bądź na bieżąco!</p>
+          <a href="https://www.facebook.com/profile.php?id=61575530471137" target="_blank" class="btn-primary coming-soon-btn">
+            <i class="ph-bold ph-thumbs-up"></i> Obserwuj na Facebooku
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="logo_festiwal4kultur.png" alt="Logo Łap Kulturę">
+            <div class="footer-logo-text">
+              <span>Pomorski Festiwal</span>
+              <span>Łap Kulturę</span>
+              <small>Miastko · 4 lipca 2026</small>
+            </div>
+          </div>
+          <p>Wyjątkowe wydarzenie łączące muzykę, sztukę i lokalną energię. Promujemy bogactwo kulturowe Pomorza dla całych rodzin.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=61575530471137" target="_blank" aria-label="Facebook"><img src="facebook-app-symbol.png" alt="Facebook" class="footer-social-icon"></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Menu</h5>
+          <ul>
+            <li><a href="#about">O festiwalu</a></li>
+            <li><a href="#galeria">Galeria 2025</a></li>
+            <li><a href="#news">Aktualności</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Kontakt</h5>
+          <div class="footer-contact-item">
+            <div class="ico">📍</div>
+            <p>Kaczy Dołek<br>77-200 Miastko<br>woj. pomorskie</p>
+          </div>
+          <div class="footer-contact-item">
+            <div class="ico">📞</div>
+            <p>
+              Organizacja: <a href="tel:+48883553300">+48 883 553 300</a><br>
+              Sponsorzy: <a href="tel:+48698679558">+48 698 679 558</a>
+            </p>
+          </div>
+          <div class="footer-contact-item">
+            <div class="ico">✉️</div>
+            <p><a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a></p>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Jak do nas trafić?</h5>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2338.522662707847!2d16.97740221593675!3d54.16433802033684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4702147015f6d3c7%3A0x8100984c8c6fbf73!2sRynek%2C%2077-200%20Miastko!5e0!3m2!1spl!2spl!4v1650000000000!5m2!1spl!2spl"
+              loading="lazy" allowfullscreen title="Mapa">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Pomorski Festiwal "Łap Kulturę" · Wszelkie prawa zastrzeżone</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // ── Countdown ──────────────────────────────────────────
+    const fest = new Date('July 4, 2026 11:00:00').getTime();
+    const wrap = document.getElementById('countdown-wrap');
+    const ended = document.getElementById('cd-ended');
+
+    function tick() {
+      const d = fest - Date.now();
+      if (d <= 0) { wrap.classList.add('hide'); ended.classList.add('show'); return; }
+      document.getElementById('days').textContent    = String(Math.floor(d/86400000)).padStart(2,'0');
+      document.getElementById('hours').textContent   = String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(Math.floor(d%3600000/60000)).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(Math.floor(d%60000/1000)).padStart(2,'0');
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ── Nav scroll ─────────────────────────────────────────
+    const nav = document.getElementById('main-nav');
+    const scrollTop = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.pageYOffset > 60);
+      scrollTop.classList.toggle('visible', window.pageYOffset > 400);
+    });
+    scrollTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    // ── Hamburger ──────────────────────────────────────────
+    const ham = document.getElementById('hamburger');
+    const links = document.getElementById('nav-links');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      ham.classList.remove('open'); links.classList.remove('open');
+    }));
+
+    // ── Smooth scroll ──────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 70, behavior:'smooth' }); }
+      });
+    });
+
+    // ── Reveal ─────────────────────────────────────────────
+    const ro = new IntersectionObserver(entries =>
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // ── Counters (IntersectionObserver) ────────────────────
+    let counted = false;
+    const statsObs = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting || counted) return;
+      counted = true;
+      document.querySelectorAll('[data-counter-end]').forEach(el => {
+        const target = +el.dataset.counterEnd;
+        let cur = 0;
+        const step = () => {
+          cur += Math.max(1, Math.ceil(target/40));
+          el.textContent = cur >= target ? target : cur;
+          if (cur < target) setTimeout(step, 50);
+        };
+        step();
+      });
+    }, { threshold: 0.3 });
+    const sr = document.getElementById('stats-row');
+    if (sr) statsObs.observe(sr);
+
+    // ── Hero bg rotation ───────────────────────────────────
+    const bgs = [
+      document.getElementById('hbg1'),
+      document.getElementById('hbg2'),
+      document.getElementById('hbg3')
+    ];
+    let cur = 0;
+    if (window.innerWidth >= 768) {
+      setInterval(() => {
+        bgs[cur].classList.remove('active');
+        cur = (cur+1) % bgs.length;
+        bgs[cur].classList.add('active');
+      }, 5000);
+    }
+
+    // ── Lightbox ───────────────────────────────────────────
+    const items = Array.from(document.querySelectorAll('.bento-item'));
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    let lbIdx = 0;
+
+    const openLb = i => {
+      lbIdx = i;
+      lbImg.src = items[i].querySelector('img').src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+    const nextLb = () => openLb((lbIdx+1) % items.length);
+    const prevLb = () => openLb((lbIdx-1+items.length) % items.length);
+
+    items.forEach((item, i) => item.addEventListener('click', () => openLb(i)));
+    document.getElementById('lb-close').addEventListener('click', closeLb);
+    document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); nextLb(); });
+    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); prevLb(); });
+    lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key==='Escape') closeLb();
+      if (e.key==='ArrowRight') nextLb();
+      if (e.key==='ArrowLeft')  prevLb();
+    });
+
+  });
+  </script>
+</body>
+</html>
