@@ -789,29 +789,28 @@
 
     .artists-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
       margin-top: 1rem;
     }
-    @media(max-width:560px){ .artists-row { grid-template-columns:1fr; } }
+    @media(max-width:760px){ .artists-row { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:420px){ .artists-row { grid-template-columns:1fr; } }
     .artist-card {
-      background: var(--grad);
       border-radius: 18px;
-      padding: 1.6rem;
-      display: flex;
-      align-items: center;
-      gap: 1.1rem;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
       transition: transform .25s, box-shadow .25s;
     }
-    .artist-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(217,43,147,.35); }
+    .artist-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.35); }
     .artist-photo {
-      width: 72px; height: 72px; border-radius: 50%;
+      width: 100%; aspect-ratio: 1/1;
       object-fit: cover; object-position: center top;
-      border: 3px solid rgba(255,255,255,.4);
-      flex-shrink: 0;
+      display: block;
     }
-    .artist-name { font-family:'Anton',sans-serif; font-size:1.35rem; color:#fff; letter-spacing:.5px; }
-    .artist-tag { font-size:.78rem; color:rgba(255,255,255,.8); font-weight:700; letter-spacing:.5px; margin-top:.2rem; }
+    .artist-body { padding: 1rem .8rem 1.2rem; text-align: center; }
+    .artist-name { font-family:'Anton',sans-serif; font-size:1.25rem; color:#fff; letter-spacing:.5px; }
+    .artist-tag { font-size:.74rem; color:rgba(255,255,255,.7); font-weight:700; letter-spacing:.5px; margin-top:.25rem; }
 
     /* ─── STREFY TEMATYCZNE ────────────────────────────── */
     .strefy-intro { text-align:center; max-width:560px; margin:0 auto 3rem; color:#555; font-size:.98rem; line-height:1.8; }
@@ -1202,28 +1201,28 @@
       <div class="artists-row reveal">
         <div class="artist-card">
           <img src="Golden-Life.png" alt="Golden Life" class="artist-photo">
-          <div>
+          <div class="artist-body">
             <div class="artist-name">Golden Life</div>
             <div class="artist-tag">Koncert · 20:00</div>
           </div>
         </div>
         <div class="artist-card">
           <img src="one_future.jpg" alt="One Future" class="artist-photo">
-          <div>
+          <div class="artist-body">
             <div class="artist-name">One Future</div>
             <div class="artist-tag">Koncert · 21:30</div>
           </div>
         </div>
         <div class="artist-card">
           <img src="edzio.jpg" alt="Edzio Rap" class="artist-photo">
-          <div>
+          <div class="artist-body">
             <div class="artist-name">Edzio Rap</div>
             <div class="artist-tag">Koncert · 17:05</div>
           </div>
         </div>
         <div class="artist-card">
           <img src="majestic.png" alt="Majestic" class="artist-photo">
-          <div>
+          <div class="artist-body">
             <div class="artist-name">Majestic</div>
             <div class="artist-tag">Koncert · 15:30</div>
           </div>
