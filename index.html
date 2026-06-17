@@ -340,6 +340,10 @@
     .section-light { background:#fff; color:#0a0a0a; }
     .section-dark  { background:#0f0f0f; color:#fff; }
     .section-gray  { background:#f7f7f7; color:#0a0a0a; }
+    .section-program {
+      background: linear-gradient(160deg, #3d0b6e 0%, #6a1b9a 45%, #a01a86 100%);
+      color:#fff;
+    }
     .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
     .section-pad { padding:6rem 0; }
 
@@ -782,12 +786,11 @@
 
     .artists-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
       margin-top: 1rem;
     }
-    @media(max-width:760px){ .artists-row { grid-template-columns:repeat(2,1fr); } }
-    @media(max-width:420px){ .artists-row { grid-template-columns:1fr; } }
+    @media(max-width:620px){ .artists-row { grid-template-columns:1fr; } }
     .artist-card {
       border-radius: 16px;
       text-align: center;
@@ -798,13 +801,14 @@
     }
     .artist-card:hover { transform: translateY(-4px); border-color: rgba(217,43,147,.5); }
     .artist-photo-wrap {
-      width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative;
+      width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative;
+      background: rgba(0,0,0,.25);
     }
     .artist-photo-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      width: 100%; height: 100%; object-fit: contain; object-position: center;
       transition: transform .4s ease;
     }
-    .artist-card:hover .artist-photo-wrap img { transform: scale(1.06); }
+    .artist-card:hover .artist-photo-wrap img { transform: scale(1.04); }
     .artist-body { padding: 1.1rem 1rem 1.4rem; }
     .artist-ico {
       width: 54px; height: 54px; border-radius: 50%;
@@ -1065,11 +1069,11 @@
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links-wrap" id="nav-links">
-      <a href="#about">O festiwalu</a>
       <a href="#program">Program</a>
       <a href="#strefy">Strefy</a>
       <a href="#plakat">Plakat 2026</a>
       <a href="#galeria">Galeria 2025</a>
+      <a href="#sponsorzy">Sponsorzy</a>
       <a href="#contact">Kontakt</a>
       <a href="https://maps.app.goo.gl/wPEpSeRgu4UwQkSy8" target="_blank" class="nav-cta">Wstęp bezpłatny</a>
     </div>
@@ -1115,35 +1119,6 @@
 
   <hr class="divider">
 
-  <!-- O FESTIWALU -->
-  <section id="about" class="section-light section-pad">
-    <div class="container">
-      <div class="section-label dark"><span class="dot"></span> O nas</div>
-      <div class="about-heading-row reveal">
-        <img src="logo_festiwal4kultur.png" alt="Logo Łap Kulturę" class="about-heading-logo">
-        <h2 class="section-title-lg">
-          Kultura<br><span class="grad-text">na wyciągnięcie ręki</span>
-        </h2>
-      </div>
-
-      <div class="about-intro reveal">
-        <span class="about-intro-num">02</span>
-        <div>
-          <div class="about-intro-title">Edycja 2026 – wracamy!</div>
-          <p>Po niezapomnianej pierwszej edycji Pomorski Festiwal Łap Kulturę powraca <strong>4 lipca 2026</strong> w Miastku. Nowi artyści, nowe strefy, nowe emocje — i ta sama niepowtarzalna atmosfera, która zgromadziła nas w 2025 roku. Muzyka, kuchnia regionalna, warsztaty, rękodzieło i strefa dla najmłodszych — wszystko w jednym miejscu i z bezpłatnym wstępem.</p>
-        </div>
-      </div>
-
-      <!-- Hasło -->
-      <div class="quote-band reveal">
-        <span class="quote-text">Łap chwilę. Łap kulturę.</span>
-        <span class="quote-meta">4 lipca 2026 · Miastko · Wstęp bezpłatny</span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
   <!-- PLAKAT 2026 -->
   <section id="plakat" class="section-gray section-pad">
     <div class="container">
@@ -1172,7 +1147,7 @@
   <hr class="divider">
 
   <!-- PROGRAM 2026 -->
-  <section id="program" class="section-dark section-pad">
+  <section id="program" class="section-program section-pad">
     <div class="container">
       <div class="section-label light"><span class="dot"></span> Sobota, 4 lipca 2026</div>
       <h2 class="section-title-lg reveal">
@@ -1406,59 +1381,9 @@
 
   <hr class="divider">
 
-  <!-- AKTUALNOŚCI -->
-  <section id="news" class="section-gray section-pad">
+  <!-- CTA -->
+  <section id="cta" class="section-gray section-pad">
     <div class="container">
-      <div class="section-label dark"><span class="dot"></span> Co słychać</div>
-      <h2 class="section-title-lg reveal">Aktualności</h2>
-
-      <div class="news-grid">
-        <div class="news-card reveal reveal-delay-1">
-          <div class="news-card-img">
-            <img src="baner11.jpg" alt="Festiwal 2026 – ruszamy!" loading="lazy">
-          </div>
-          <div class="news-card-body">
-            <span class="news-tag">9 kwietnia 2026</span>
-            <div class="news-card-title">Festiwal 2026 – ruszamy!</div>
-            <p>Drugi rok z rzędu! Łap Kulturę powraca 4 lipca 2026 w Miastku. Nowi artyści, nowe niespodzianki — szczegóły wkrótce!</p>
-          </div>
-        </div>
-
-        <div class="news-card reveal reveal-delay-2">
-          <div class="news-card-img">
-            <img src="galeria2025/557703968_25072325895705359_8156713356604737017_n.jpg" alt="Wystawcy" loading="lazy">
-          </div>
-          <div class="news-card-body">
-            <span class="news-tag">9 kwietnia 2026</span>
-            <div class="news-card-title">Jesteś wystawcą?</div>
-            <p>Tworzysz rękodzieło lub oferujesz regionalne produkty? Dołącz do festiwalu! Napisz: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a></p>
-          </div>
-        </div>
-
-        <div class="news-card reveal reveal-delay-1">
-          <div class="news-card-img">
-            <img src="galeria2025/558226852_25072287275709221_6838247282406033462_n.jpg" alt="Wolontariusze" loading="lazy">
-          </div>
-          <div class="news-card-body">
-            <span class="news-tag">9 kwietnia 2026</span>
-            <div class="news-card-title">Szukamy wolontariuszy!</div>
-            <p>Chcesz być częścią ekipy? Dołącz do wolontariuszy i twórz z nami festiwal od środka. Napisz: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a></p>
-          </div>
-        </div>
-
-        <div class="news-card reveal reveal-delay-2">
-          <div class="news-card-img">
-            <img src="galeria2025/569437529_25316031928001420_1372712433781315398_n.jpg" alt="Partnerzy" loading="lazy">
-          </div>
-          <div class="news-card-body">
-            <span class="news-tag">9 kwietnia 2026</span>
-            <div class="news-card-title">Zostań partnerem 2026</div>
-            <p>Budujemy nową edycję. Zapraszamy do współpracy: <a href="mailto:stowarzyszenielapkulture@op.pl">stowarzyszenielapkulture@op.pl</a> lub <a href="tel:+48698679558">+48 698 679 558</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
       <div class="coming-soon reveal">
         <div class="coming-soon-content">
           <h3>Program 2026<br><span class="grad-text">już dostępny!</span></h3>
@@ -1513,13 +1438,11 @@
         <div class="footer-col">
           <h5>Menu</h5>
           <ul>
-            <li><a href="#about">O festiwalu</a></li>
             <li><a href="#program">Program</a></li>
             <li><a href="#strefy">Strefy tematyczne</a></li>
             <li><a href="#plakat">Plakat 2026</a></li>
             <li><a href="#galeria">Galeria 2025</a></li>
             <li><a href="#sponsorzy">Sponsorzy</a></li>
-            <li><a href="#news">Aktualności</a></li>
             <li><a href="#contact">Kontakt</a></li>
           </ul>
         </div>
