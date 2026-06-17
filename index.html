@@ -387,6 +387,28 @@
     }
     @media(max-width:640px){ .about-grid { grid-template-columns:1fr; } }
 
+    .about-intro {
+      display: flex;
+      gap: 1.8rem;
+      align-items: flex-start;
+      background: var(--grad);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+      color: #fff;
+    }
+    @media(max-width:560px){ .about-intro { flex-direction:column; gap:1rem; padding:2rem 1.5rem; } }
+    .about-intro-num {
+      font-family: 'Anton', sans-serif;
+      font-size: 4.5rem;
+      line-height: .8;
+      color: rgba(255,255,255,.3);
+      flex-shrink: 0;
+    }
+    .about-intro-title { font-family:'Anton',sans-serif; font-size:1.6rem; letter-spacing:.5px; margin-bottom:.7rem; }
+    .about-intro p { font-size:.98rem; line-height:1.8; color:rgba(255,255,255,.85); }
+    .about-intro p strong { color:#fff; }
+
     .about-card {
       background: #fff;
       padding: 3rem 2.5rem;
@@ -718,6 +740,12 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 1.4rem; color: #fff; flex-shrink: 0;
     }
+    .guest-photo {
+      width: 72px; height: 72px; border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      border: 3px solid rgba(255,255,255,.4);
+      flex-shrink: 0;
+    }
     .guest-name { font-family:'Anton',sans-serif; font-size:1.35rem; color:#fff; letter-spacing:.5px; }
     .guest-role { font-size:.78rem; color:rgba(255,255,255,.75); font-weight:600; }
 
@@ -762,13 +790,22 @@
     @media(max-width:420px){ .artists-row { grid-template-columns:1fr; } }
     .artist-card {
       border-radius: 16px;
-      padding: 1.6rem 1.2rem;
       text-align: center;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.08);
       transition: transform .25s, border-color .25s;
+      overflow: hidden;
     }
     .artist-card:hover { transform: translateY(-4px); border-color: rgba(217,43,147,.5); }
+    .artist-photo-wrap {
+      width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative;
+    }
+    .artist-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      transition: transform .4s ease;
+    }
+    .artist-card:hover .artist-photo-wrap img { transform: scale(1.06); }
+    .artist-body { padding: 1.1rem 1rem 1.4rem; }
     .artist-ico {
       width: 54px; height: 54px; border-radius: 50%;
       background: var(--grad);
@@ -789,16 +826,20 @@
     @media(max-width:720px){ .strefy-grid { grid-template-columns:1fr; } }
     .strefa-card {
       display: flex;
-      gap: 1.2rem;
+      flex-direction: column;
       background: #fff;
       border-radius: 16px;
-      padding: 1.5rem;
+      overflow: hidden;
       border: 1px solid #eee;
-      border-left: 5px solid var(--accent, var(--pink));
+      border-top: 5px solid var(--accent, var(--pink));
       box-shadow: 0 4px 20px rgba(0,0,0,.04);
       transition: transform .2s, box-shadow .2s;
     }
     .strefa-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.1); }
+    .strefa-photo {
+      width: 100%; height: 180px; object-fit: cover; display: block;
+    }
+    .strefa-body { display: flex; gap: 1rem; padding: 1.4rem 1.5rem; }
     .strefa-ico {
       width: 46px; height: 46px; border-radius: 12px;
       background: var(--accent, var(--pink));
@@ -807,6 +848,18 @@
     }
     .strefa-title { font-weight: 800; font-size: 1rem; color:#0a0a0a; margin-bottom: .35rem; line-height:1.25; }
     .strefa-card p { font-size: .85rem; color:#666; line-height:1.6; }
+
+    /* ─── SPONSORZY ────────────────────────────────────── */
+    .sponsors-banner {
+      background: #fff;
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.06);
+      border: 1px solid #eee;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .sponsors-banner img { width: 100%; height: auto; display: block; }
 
     /* ─── PLAKAT 2026 ──────────────────────────────────── */
     .poster-grid {
@@ -1073,31 +1126,11 @@
         </h2>
       </div>
 
-      <div class="about-grid reveal">
-        <div class="about-card">
-          <div class="about-num">02</div>
-          <div class="about-card-title">Edycja 2026 – wracamy!</div>
-          <p style="color:rgba(255,255,255,.6);">Po niezapomnianej pierwszej edycji Pomorski Festiwal Łap Kulturę powraca 4 lipca 2026 w Miastku. Nowi artyści, nowe strefy, nowe emocje — i ta sama niepowtarzalna atmosfera, która zgromadziła nas w 2025 roku.</p>
-        </div>
-        <div class="about-card reveal reveal-delay-1">
-          <div class="about-icon-wrap"><img src="music.png" alt="Muzyka" class="about-icon-img"></div>
-          <div class="about-card-title">Muzyka i kultura</div>
-          <p>Folkowe i wielokulturowe brzmienia, koncerty na żywo i warsztaty muzyczne — dla każdego, kto kocha autentyczne dźwięki Pomorza i świata.</p>
-        </div>
-        <div class="about-card reveal reveal-delay-2">
-          <div class="about-icon-wrap"><img src="chef.png" alt="Kuchnia" class="about-icon-img"></div>
-          <div class="about-card-title">Kuchnia regionalna</div>
-          <p>Kaszubskie smaki, ukraińska kuchnia i lokalne wyroby — strefa kulinarna to podróż przez smaki różnych kultur Pomorza.</p>
-        </div>
-        <div class="about-card reveal reveal-delay-3">
-          <div class="about-icon-wrap"><img src="spin.png" alt="Warsztaty" class="about-icon-img"></div>
-          <div class="about-card-title">Warsztaty i rękodzieło</div>
-          <p>Wycinanki, garncarstwo, haft kaszubski — odkryj radość tworzenia i poznaj mistrzów tradycyjnych technik z całego regionu.</p>
-        </div>
-        <div class="about-card reveal reveal-delay-3">
-          <div class="about-icon-wrap"><img src="family-2.png" alt="Strefa dziecięca" class="about-icon-img"></div>
-          <div class="about-card-title">Strefa dziecięca</div>
-          <p>Animacje, zabawy ludowe, malowanie twarzy i warsztaty artystyczne — bezpieczna przestrzeń, gdzie najmłodsi mogą odkrywać tradycje przez zabawę i kreatywność.</p>
+      <div class="about-intro reveal">
+        <span class="about-intro-num">02</span>
+        <div>
+          <div class="about-intro-title">Edycja 2026 – wracamy!</div>
+          <p>Po niezapomnianej pierwszej edycji Pomorski Festiwal Łap Kulturę powraca <strong>4 lipca 2026</strong> w Miastku. Nowi artyści, nowe strefy, nowe emocje — i ta sama niepowtarzalna atmosfera, która zgromadziła nas w 2025 roku. Muzyka, kuchnia regionalna, warsztaty, rękodzieło i strefa dla najmłodszych — wszystko w jednym miejscu i z bezpłatnym wstępem.</p>
         </div>
       </div>
 
@@ -1123,7 +1156,7 @@
       </p>
       <div class="poster-grid reveal">
         <div class="lightbox-item poster-item">
-          <img src="_druk_a5.jpg" alt="Plakat Łap Kulturę 2026 – strona 1" loading="lazy">
+          <img src="druk_a5.jpg" alt="Plakat Łap Kulturę 2026 – strona 1" loading="lazy">
           <span class="poster-label">Strona 1</span>
           <div class="poster-zoom">&#128269;</div>
         </div>
@@ -1149,14 +1182,14 @@
       <h3 class="program-subhead reveal">Goście specjalni</h3>
       <div class="guests-row reveal">
         <div class="guest-card">
-          <div class="guest-ico"><i class="ph-fill ph-microphone-stage"></i></div>
+          <img src="dorota-wellman.png" alt="Dorota Wellman" class="guest-photo">
           <div>
             <div class="guest-name">Dorota Wellman</div>
             <div class="guest-role">Dziennikarka &amp; prowadząca</div>
           </div>
         </div>
         <div class="guest-card">
-          <div class="guest-ico"><i class="ph-fill ph-star"></i></div>
+          <img src="marta-klepka.jpg" alt="Marta Klepka" class="guest-photo">
           <div>
             <div class="guest-name">Marta Klepka</div>
             <div class="guest-role">Gość specjalny</div>
@@ -1184,24 +1217,32 @@
       <h3 class="program-subhead reveal">Gwiazdy sceny</h3>
       <div class="artists-row reveal">
         <div class="artist-card">
-          <div class="artist-ico"><i class="ph-fill ph-music-notes"></i></div>
-          <div class="artist-name">Golden Life</div>
-          <div class="artist-tag">Koncert · 20:00</div>
+          <div class="artist-photo-wrap"><img src="Golden-Life.png" alt="Golden Life"></div>
+          <div class="artist-body">
+            <div class="artist-name">Golden Life</div>
+            <div class="artist-tag">Koncert · 20:00</div>
+          </div>
         </div>
         <div class="artist-card">
-          <div class="artist-ico"><i class="ph-fill ph-music-notes"></i></div>
-          <div class="artist-name">One Future</div>
-          <div class="artist-tag">Koncert · 21:30</div>
+          <div class="artist-photo-wrap"><img src="one_future.jpg" alt="One Future"></div>
+          <div class="artist-body">
+            <div class="artist-name">One Future</div>
+            <div class="artist-tag">Koncert · 21:30</div>
+          </div>
         </div>
         <div class="artist-card">
-          <div class="artist-ico"><i class="ph-fill ph-microphone"></i></div>
-          <div class="artist-name">Edzio Rap</div>
-          <div class="artist-tag">Koncert · 17:05</div>
+          <div class="artist-photo-wrap"><img src="edzio.jpg" alt="Edzio Rap"></div>
+          <div class="artist-body">
+            <div class="artist-name">Edzio Rap</div>
+            <div class="artist-tag">Koncert · 17:05</div>
+          </div>
         </div>
         <div class="artist-card">
-          <div class="artist-ico"><i class="ph-fill ph-guitar"></i></div>
-          <div class="artist-name">Majestic</div>
-          <div class="artist-tag">Koncert · 15:30</div>
+          <div class="artist-photo-wrap"><img src="majestic.png" alt="Majestic"></div>
+          <div class="artist-body">
+            <div class="artist-name">Majestic</div>
+            <div class="artist-tag">Koncert · 15:30</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1221,52 +1262,73 @@
       </p>
       <div class="strefy-grid reveal">
         <div class="strefa-card" style="--accent:var(--orange);">
-          <div class="strefa-ico"><i class="ph-bold ph-cooking-pot"></i></div>
-          <div>
-            <div class="strefa-title">Warsztaty kulinarne z Danielem Władymirowem</div>
-            <p>Wspólne przygotowywanie pizzy, poznawanie kulinarnych trików i smaków, które zachwycą małych i dużych uczestników.</p>
+          <img src="daniel.jpg" alt="Warsztaty kulinarne z Danielem Władymirowem" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-cooking-pot"></i></div>
+            <div>
+              <div class="strefa-title">Warsztaty kulinarne z Danielem Władymirowem</div>
+              <p>Wspólne przygotowywanie pizzy, poznawanie kulinarnych trików i smaków, które zachwycą małych i dużych uczestników.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--pink);">
-          <div class="strefa-ico"><i class="ph-bold ph-cake"></i></div>
-          <div>
-            <div class="strefa-title">Warsztaty kulinarne dla dzieci z Basią Pietrzyk</div>
-            <p>Kolorowe, kreatywne i pełne dobrej zabawy zajęcia dla najmłodszych miłośników gotowania.</p>
+          <img src="basia.jpg" alt="Warsztaty kulinarne dla dzieci z Basią Pietrzyk" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-cake"></i></div>
+            <div>
+              <div class="strefa-title">Warsztaty kulinarne dla dzieci z Basią Pietrzyk</div>
+              <p>Kolorowe, kreatywne i pełne dobrej zabawy zajęcia dla najmłodszych miłośników gotowania.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--teal);">
-          <div class="strefa-ico"><i class="ph-bold ph-spray-bottle"></i></div>
-          <div>
-            <div class="strefa-title">Graffiti Jam</div>
-            <p>Przez cały dzień powstawać będzie wyjątkowa festiwalowa przestrzeń tworzona przez artystów graffiti — poczuj klimat sztuki ulicznej.</p>
+          <img src="grafittijam.jpg" alt="Graffiti Jam" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-spray-bottle"></i></div>
+            <div>
+              <div class="strefa-title">Graffiti Jam</div>
+              <p>Przez cały dzień powstawać będzie wyjątkowa festiwalowa przestrzeń tworzona przez artystów graffiti — poczuj klimat sztuki ulicznej.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--green);">
-          <div class="strefa-ico"><i class="ph-bold ph-hand-heart"></i></div>
-          <div>
-            <div class="strefa-title">Strefa rękodzieła Klubu Seniora</div>
-            <p>Warsztaty międzypokoleniowe, tradycyjne rękodzieło, kreatywne zajęcia i możliwość poznania lokalnych pasjonatów.</p>
+          <img src="seniorki.jpeg" alt="Strefa rękodzieła Klubu Seniora" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-hand-heart"></i></div>
+            <div>
+              <div class="strefa-title">Strefa rękodzieła Klubu Seniora</div>
+              <p>Warsztaty międzypokoleniowe, tradycyjne rękodzieło, kreatywne zajęcia i możliwość poznania lokalnych pasjonatów.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--purple);">
-          <div class="strefa-ico"><i class="ph-bold ph-bank"></i></div>
-          <div>
-            <div class="strefa-title">Towarzystwo Historyczne Regionu Miastkowskiego</div>
-            <p>Spotkania z historią regionu, ciekawe opowieści, archiwalne fotografie i lokalne ciekawostki oraz rękodzieło.</p>
+          <img src="historyczne.jpeg" alt="Towarzystwo Historyczne Regionu Miastkowskiego" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-bank"></i></div>
+            <div>
+              <div class="strefa-title">Towarzystwo Historyczne Regionu Miastkowskiego</div>
+              <p>Spotkania z historią regionu, ciekawe opowieści, archiwalne fotografie i lokalne ciekawostki oraz rękodzieło.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--red);">
-          <div class="strefa-ico"><i class="ph-bold ph-users-three"></i></div>
-          <div>
-            <div class="strefa-title">Strefa rodzinna</div>
-            <p>Zabawy, animacje i aktywności przygotowane przez Hufiec ZHP dla całych rodzin, aby każdy znalazł coś dla siebie.</p>
+          <img src="rodzinna.png" alt="Strefa rodzinna" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-users-three"></i></div>
+            <div>
+              <div class="strefa-title">Strefa rodzinna</div>
+              <p>Zabawy, animacje i aktywności przygotowane przez Hufiec ZHP dla całych rodzin, aby każdy znalazł coś dla siebie.</p>
+            </div>
           </div>
         </div>
         <div class="strefa-card" style="--accent:var(--yellow);">
-          <div class="strefa-ico"><i class="ph-bold ph-umbrella"></i></div>
-          <div>
-            <div class="strefa-title">Festiwalowa przestrzeń relaksu</div>
-            <p>Miejsce spotkań, odpoczynku i pamiątkowych zdjęć w wyjątkowej atmosferze Pomorskiego Festiwalu Łap Kulturę.</p>
+          <img src="strefa_relaks.png" alt="Festiwalowa przestrzeń relaksu" class="strefa-photo" loading="lazy">
+          <div class="strefa-body">
+            <div class="strefa-ico"><i class="ph-bold ph-umbrella"></i></div>
+            <div>
+              <div class="strefa-title">Festiwalowa przestrzeń relaksu</div>
+              <p>Miejsce spotkań, odpoczynku i pamiątkowych zdjęć w wyjątkowej atmosferze Pomorskiego Festiwalu Łap Kulturę.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1411,6 +1473,24 @@
 
   <hr class="divider">
 
+  <!-- SPONSORZY -->
+  <section id="sponsorzy" class="section-light section-pad">
+    <div class="container">
+      <div class="section-label dark" style="justify-content:center;"><span class="dot"></span> Razem tworzymy festiwal</div>
+      <h2 class="section-title-lg reveal" style="text-align:center;">
+        Partnerzy<br><span class="grad-text">i sponsorzy</span>
+      </h2>
+      <p class="strefy-intro reveal">
+        Festiwal nie powstałby bez wsparcia naszych partnerów, patronów i sponsorów. Dziękujemy, że jesteście z nami!
+      </p>
+      <div class="sponsors-banner reveal">
+        <img src="baner_sposnorzy.jpg" alt="Partnerzy i sponsorzy Pomorskiego Festiwalu Łap Kulturę" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- FOOTER -->
   <footer id="contact">
     <div class="container">
@@ -1438,6 +1518,7 @@
             <li><a href="#strefy">Strefy tematyczne</a></li>
             <li><a href="#plakat">Plakat 2026</a></li>
             <li><a href="#galeria">Galeria 2025</a></li>
+            <li><a href="#sponsorzy">Sponsorzy</a></li>
             <li><a href="#news">Aktualności</a></li>
             <li><a href="#contact">Kontakt</a></li>
           </ul>
