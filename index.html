@@ -745,11 +745,12 @@
       font-size: 1.4rem; color: #fff; flex-shrink: 0;
     }
     .guest-photo {
-      width: 96px; height: 96px; border-radius: 50%;
+      width: 150px; height: 150px; border-radius: 50%;
       object-fit: cover; object-position: center top;
       border: 4px solid rgba(255,255,255,.45);
       flex-shrink: 0;
     }
+    @media(max-width:480px){ .guest-photo { width:120px; height:120px; } }
     .guest-name { font-family:'Anton',sans-serif; font-size:1.7rem; color:#fff; letter-spacing:.5px; line-height:1.1; }
     .guest-role { font-size:.8rem; color:rgba(255,255,255,.8); font-weight:700; letter-spacing:.5px; margin-top:.3rem; }
     .guest-bio p { font-size:.9rem; line-height:1.7; color:rgba(255,255,255,.9); margin-bottom:.7rem; }
